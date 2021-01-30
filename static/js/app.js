@@ -4,5 +4,5 @@ d3.json("samples.json").then(function(data) {
 });
 
 // // Promise Pending
-// const dataPromise = d3.json("samples.json");
-// console.log("Data Promise: ", dataPromise);
+const dataPromise = d3.json("samples.json");
+console.log("Data Promise: ", dataPromise);
