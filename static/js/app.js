@@ -14,21 +14,27 @@
   */
 
 
-
+// Build functions to display metadata and charts
 // Fetch the JSON data and console log it
 d3.json("samples.json").then(function(data) {
   console.log(data);
 });
 
-// // Promise Pending
-const dataPromise = d3.json("samples.json");
-console.log("Data Promise: ", dataPromise);
 
 
-// Dropdown menu to select ID
-// Listen to events
 
 
+
+// Create a function to build barchart and bubble chart
+function buildCharts(sample) {
+  d3.json("samples.json").then(function(data){
+    var x_axis = data.otu_ids;
+    var y_axis = data.sample_values;
+    var 
+
+  });
+
+}
 // Bar Chart
 var trace1 = {
 
@@ -62,10 +68,13 @@ Plotly.newPlot("bubble", data2, layout2);
 
 
 
+
+
+// Dropdown menu to select ID
+// Listen to events
+
 // Filter Individuals
 function filterIndividual() {
   return samples.names ===  " ";
 }
-
-
 // Display demographic info and metadata
