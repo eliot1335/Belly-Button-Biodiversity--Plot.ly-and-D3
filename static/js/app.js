@@ -12,10 +12,28 @@
    5. Display each key-value pair from the metadata JSON object somewhere on the page.
    6. Update all of the plots any time that a new sample is selected.
   */
-
  d3.json("../samples.json").then(function(data) {
-   console.log(data);
- });
+  console.log(data);
+});
+
+
+// Populate dropdown menu
+function populateDropdown() {
+  d3.json("../samples.json").then(function(data){
+
+    var select = document.getElementById("selDataset");
+    var options = data["names"]
+    for (var i = 0; i < options.length; i++) {
+      var opt =options[i];
+      var el = document.createElement("option");
+      el.textContent = opt;
+      el.value = opt;
+      select.appendChild(el);
+    }
+  })
+}
+
+populateDropdown();
 
 
 function buildBubbleChart() {
@@ -76,7 +94,19 @@ function buildBarChart() {
   });
 }
 
-
+// dropdown menu create id filter
+  // insert filtered id to grab the info we want
+// metadata populate
+// initialize page
+  // first id
+    //metadata
+    //barchart
+    //bubblechart
+// option change
+  // selected id
+    //metadata
+    //barchart
+    //bubblechart
 
 
 
