@@ -42,6 +42,7 @@ function init() {
     // displayMetaData(sampleId);
     buildBarChart(sampleId);
     buildBubbleChart(sampleId);
+    displayMetaData(sampleId);
   })
 }
 
@@ -50,6 +51,7 @@ function init() {
 function optionChanged(sampleId) {
   buildBubbleChart(sampleId);
   buildBarChart(sampleId);
+  displayMetaData(sampleId);
 }
 
 
@@ -124,6 +126,18 @@ function buildBarChart(sampleId) {
     var data = [bar];
 
   Plotly.newPlot('bar', data);
+  });
+}
+
+
+function displayMetaData(sampleId) {
+  d3.json("../samples.json").then(function(jsonData) {
+    var metadataPanel = d3.select("#sample-metadata");
+    var samplesFilter = jsonData["metadata"].filter(item => item["id"] == sampleId);
+    metadataPanel.html("");
+    Object.entries(samplesFilter[0]).forEach(([key, value]) => {
+      metadataPanel.append("h6").text(`${key}: ${value}`);
+    });
   });
 }
 
