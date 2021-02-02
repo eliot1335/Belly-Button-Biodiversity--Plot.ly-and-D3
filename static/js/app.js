@@ -13,68 +13,73 @@
    6. Update all of the plots any time that a new sample is selected.
   */
 
-
-// Build functions to display metadata and charts
-// Fetch the JSON data and console log it
-d3.json("samples.json").then(function(data) {
-  console.log(data);
-});
+ d3.json("../samples.json").then(function(data) {
+   console.log(data);
+ });
 
 
+function buildBubbleChart() {
+  // Read in samples.json
+  d3.json("../samples.json").then(function(data) {
+    var x_axis = data["samples"][0]["otu_ids"];
+    var y_axis = data["samples"][0]["sample_values"];
+    var size = data["samples"][0]["sample_values"];
+    var color = data["samples"][0]["otu_ids"];
+    var texts = data["samples"][0]["otu_labels"];
 
+    // console.log(x_axis);
 
+    var bubble = {
+      x: x_axis,
+      y: y_axis,
+      text: texts,
+      mode: `markers`,
+      marker: {
+        size: size,
+        color: color
+      }
+    };
 
-
-// Create a function to build barchart and bubble chart
-function buildCharts(sample) {
-  d3.json("samples.json").then(function(data){
-    var x_axis = data.otu_ids;
-    var y_axis = data.sample_values;
-    var 
-
+    var data = [bubble];
+    var layout = {
+      title: "Belly Button Bacteria",
+      xaxis: {title: "OTU ID"}
+    };
+    Plotly.newPlot("bubble", data, layout);
   });
+};
 
+
+
+
+
+
+
+function buildBarChart() {
+  d3.json("../samples.json").then(function(data) {
+    var x_axis = data["samples"][0]["sample_values"].slice(0,10);
+    var y_axis = data["samples"][0]["otu_ids"].slice(0,10);
+    var hoverText = data["samples"][0]["otu_labels"].slice(0,10);
+
+
+    var bar = {
+      x: x_axis,
+      y: y_axis,
+      text: hoverText,
+      type: 'bar',
+      orientation: 'h'
+  };
+
+    var data = [bar];
+
+  Plotly.newPlot('bar', data);
+  });
 }
-// Bar Chart
-var trace1 = {
-
-};
-
-var data = [trace1];
-
-var layout = {
-  title: "The Top 10 OTUs Found",
-  xaxis: {},
-  yaxis: {}
-};
-
-Plotly.newPlot("bar", data, layout);
-
-
-// Bubble Chart
-var trace2 = {
-
-};
-
-var data2 = [trace2];
-
-var layout2 = {
-  title: " ",
-  xaxis: { title: " "},
-  yaxis: { title: " "}
-};
-
-Plotly.newPlot("bubble", data2, layout2);
 
 
 
 
 
-// Dropdown menu to select ID
-// Listen to events
 
-// Filter Individuals
-function filterIndividual() {
-  return samples.names ===  " ";
-}
-// Display demographic info and metadata
+buildBarChart();
+buildBubbleChart();
