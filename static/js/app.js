@@ -19,45 +19,131 @@ d3.json("../samples.json").then(function(data) {
 
 
 // Populate dropdown menu
-// function populateDropdown() {
-  d3.json("../samples.json").then(function(jsonData){
+d3.json("../samples.json").then(function(jsonData){
 
-    var select = document.getElementById("selDataset");
-    var options = jsonData["names"]
-    for (var i = 0; i < options.length; i++) {
-      var opt =options[i];
-      var el = document.createElement("option");
-      el.textContent = opt;
-      el.value = opt;
-      select.appendChild(el);
-    }
-  })
-// }
-// populateDropdown();
+  var select = document.getElementById("selDataset");
+  var options = jsonData["names"]
+  for (var i = 0; i < options.length; i++) {
+    var opt =options[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+  }
+})
 
 // Initializes the page
 function init() {
   d3.json("../samples.json").then(function(jsonData) {
     var sampleId = jsonData.names[0];
     // displayMetaData(sampleId);
-    buildBarChart(sampleId);
-    buildBubbleChart(sampleId);
-    displayMetaData(sampleId);
+    buildDisplays(sampleId);
+    // buildBarChart(sampleId);
+    // buildBubbleChart(sampleId);
+    // displayMetaData(sampleId);
   })
 }
 
 
 // Call optionChanged() when a change takes place to the DOM
 function optionChanged(sampleId) {
-  buildBubbleChart(sampleId);
-  buildBarChart(sampleId);
-  displayMetaData(sampleId);
+  buildDisplays(sampleId);
+//   buildBubbleChart(sampleId);
+//   buildBarChart(sampleId);
+//   displayMetaData(sampleId);
+}
+
+
+
+function buildDisplays(sampleId) {
+  // Read in json file
+  d3.json("../samples.json").then(function(jsonData) {
+    var samplesFilter = jsonData["samples"].filter(item => item["id"] == sampleId);
+    var metaDataFilter = jsonData["metadata"].filter(row => row["id"] == sampleId);
+
+    // Set variables for bubble chart
+    var xBubble = samplesFilter[0].otu_ids;
+    var yBubble = samplesFilter[0].sample_values;
+    var sizeBubble = samplesFilter[0].sample_values;
+    var colorBubble = samplesFilter[0].otu_ids;
+    var textBubble = samplesFilter[0].otu_labels;
+
+    // Set bubble chart parameters
+    var bubble = {
+      x: xBubble,
+      y: yBubble,
+      text: textBubble,
+      mode: "markers",
+      marker: {
+        size: sizeBubble,
+        color: colorBubble
+      }
+    };
+
+    // var data1 = bubble;
+    var layout1 = {
+      title: "Belly Button Bacteria",
+      xaxis: {title: "OTU ID"}
+    };
+
+    var dataBubble = [bubble];
+
+    // Plot bubble Chart
+    Plotly.newPlot("bubble", dataBubble, layout1);
+
+    //==========================================
+    // Set Variables for Bar Chart
+    var xBar = samplesFilter[0].sample_values
+    var yBar = samplesFilter[0].otu_ids
+    var textBar = samplesFilter[0].otu_labels
+
+    // Set bubble chart parameters
+    var bar = {
+      x: xBar,
+      y: yBar,
+      text: textBar,
+      type: 'bar',
+      orientation: 'h'
+    };
+
+    var layout2 = {
+      title: "Top 10 OTUs Found",
+      xaxis: {title: "Values"},
+      yaxis: {title: "OTU Labels"}
+    };
+
+    var dataBar = [bar];
+
+    // Plot bubble Chart
+    Plotly.newPlot("bar", dataBar, layout2);
+
+
+    // ======================================
+    // Display metaData
+    var metadataPanel = d3.select("#sample-metadata");
+    metadataPanel.html("");
+    Object.entries(metaDataFilter[0]).forEach(([key, value]) => {
+      metadataPanel.append("h6").text(`${key}: ${value}`);
+    });
+  });
 }
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+/*
 function buildBubbleChart(sampleId) {
   // Read in samples.json
   d3.json("../samples.json").then(function(jsonData) {
@@ -140,6 +226,7 @@ function displayMetaData(sampleId) {
     });
   });
 }
+*/
 
 // dropdown menu create id filter
   // insert filtered id to grab the info we want
