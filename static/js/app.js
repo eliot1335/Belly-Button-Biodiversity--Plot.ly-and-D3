@@ -12,7 +12,7 @@
    5. Display each key-value pair from the metadata JSON object somewhere on the page.
    6. Update all of the plots any time that a new sample is selected.
   */
- 
+
 // d3.json("../samples.json").then(function(jsonData) {
 //   console.log(jsonData);
 // });
@@ -90,10 +90,13 @@ function buildDisplays(sampleId) {
 
 
     var xBar = sFilter[0].sample_values.slice(0, 10).reverse();
-    console.log(xBar);
+    // console.log(xBar);
     // var xBarTop10 = xBar.sort((firstNum, secondNum) => secondNum - firstNum).slice(0, 10);
     // console.log(xBar);
-    var yBar = `${sFilter[0].otu_ids}`;
+    // console.log(sFilter[0].otu_ids);
+    // Trying to test the correct display of OTU ids
+    var yBar = "OTU"+ `${JSON.stringify(sFilter[0].otu_ids)}`;
+    // console.log(yBar);
     var textBar = sFilter[0].otu_labels.slice(0, 10);
 
     // Set bubble chart parameters
