@@ -12,13 +12,14 @@
    5. Display each key-value pair from the metadata JSON object somewhere on the page.
    6. Update all of the plots any time that a new sample is selected.
   */
- d3.json("../samples.json").then(function(data) {
+
+d3.json("../samples.json").then(function(data) {
   console.log(data);
 });
 
 
 // Populate dropdown menu
-function populateDropdown() {
+// function populateDropdown() {
   d3.json("../samples.json").then(function(data){
 
     var select = document.getElementById("selDataset");
@@ -31,10 +32,27 @@ function populateDropdown() {
       select.appendChild(el);
     }
   })
+// }
+// populateDropdown();
+
+// Initializes the page
+function init() {}
+
+// Call updatePage() when a change takes place to the DOM
+d3.selectAll("selDataset").on("change", updatePage);
+
+// Create a function that gets called when a dropdown option is selected
+function updatePage() {
+  var dropdownMenu = d3.select("selDataset");
+  var dataset = dropdownMenu.property("value");
+
+  var x = [];
+  var y = [];
+  var z = [];
+
+  if (dataset === /*"filtered ID"*/) {}
+  else () {}
 }
-
-populateDropdown();
-
 
 function buildBubbleChart() {
   // Read in samples.json
