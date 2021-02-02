@@ -36,11 +36,7 @@ d3.json("../samples.json").then(function(jsonData){
 function init() {
   d3.json("../samples.json").then(function(jsonData) {
     var sampleId = jsonData.names[0];
-    // displayMetaData(sampleId);
     buildDisplays(sampleId);
-    // buildBarChart(sampleId);
-    // buildBubbleChart(sampleId);
-    // displayMetaData(sampleId);
   })
 }
 
@@ -48,9 +44,6 @@ function init() {
 // Call optionChanged() when a change takes place to the DOM
 function optionChanged(sampleId) {
   buildDisplays(sampleId);
-//   buildBubbleChart(sampleId);
-//   buildBarChart(sampleId);
-//   displayMetaData(sampleId);
 }
 
 
@@ -128,105 +121,9 @@ function buildDisplays(sampleId) {
   });
 }
 
+init();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-function buildBubbleChart(sampleId) {
-  // Read in samples.json
-  d3.json("../samples.json").then(function(jsonData) {
-
-    var samplesFilter = jsonData["samples"].filter(item => item["id"] == sampleId);
-    // var x_axis = jsonData["samples"][0]["otu_ids"];
-    var x_axis = samplesFilter[0].otu_ids;
-    // var y_axis = jsonData["samples"][0]["sample_values"];
-    var y_axis = samplesFilter[0].sample_values;
-    // var size = jsonData["samples"][0]["sample_values"];
-    var size = samplesFilter[0].sample_values;
-    // var color = jsonData["samples"][0]["otu_ids"];
-    var color = samplesFilter[0].otu_ids;
-    // var texts = jsonData["samples"][0]["otu_labels"];
-    var texts = samplesFilter[0].otu_labels;
-
-    // console.log(x_axis);
-
-    var bubble = {
-      x: x_axis,
-      y: y_axis,
-      text: texts,
-      mode: `markers`,
-      marker: {
-        size: size,
-        color: color
-      }
-    };
-
-    var data = [bubble];
-    var layout = {
-      title: "Belly Button Bacteria",
-      xaxis: {title: "OTU ID"}
-    };
-    Plotly.newPlot("bubble", data, layout);
-  });
-};
-
-
-
-
-
-
-
-function buildBarChart(sampleId) {
-  d3.json("../samples.json").then(function(jsonData) {
-
-    var samplesFilter = jsonData["samples"].filter(item => item["id"] == sampleId);
-
-    // var x_axis = jsonData["samples"][0]["sample_values"].slice(0,10);
-    var x_axis = samplesFilter[0].sample_values
-    // var y_axis = jsonData["samples"][0]["otu_ids"].slice(0,10);
-    var y_axis = samplesFilter[0].otu_ids
-    // var hoverText = jsonData["samples"][0]["otu_labels"].slice(0,10);
-    var hoverText = samplesFilter[0].otu_labels
-
-
-    var bar = {
-      x: x_axis,
-      y: y_axis,
-      text: hoverText,
-      type: 'bar',
-      orientation: 'h'
-  };
-
-    var data = [bar];
-
-  Plotly.newPlot('bar', data);
-  });
-}
-
-
-function displayMetaData(sampleId) {
-  d3.json("../samples.json").then(function(jsonData) {
-    var metadataPanel = d3.select("#sample-metadata");
-    var samplesFilter = jsonData["metadata"].filter(item => item["id"] == sampleId);
-    metadataPanel.html("");
-    Object.entries(samplesFilter[0]).forEach(([key, value]) => {
-      metadataPanel.append("h6").text(`${key}: ${value}`);
-    });
-  });
-}
-*/
 
 // dropdown menu create id filter
   // insert filtered id to grab the info we want
@@ -243,10 +140,6 @@ function displayMetaData(sampleId) {
     //bubblechart
 
 
-
-init();
-// buildBarChart();
-// buildBubbleChart();
 
 /* To-Do:
 1. Bar Chart Layout
