@@ -20,10 +20,10 @@ d3.json("../samples.json").then(function(data) {
 
 // Populate dropdown menu
 // function populateDropdown() {
-  d3.json("../samples.json").then(function(samplesJson){
+  d3.json("../samples.json").then(function(jsonData){
 
     var select = document.getElementById("selDataset");
-    var options = samplesJson["names"]
+    var options = jsonData["names"]
     for (var i = 0; i < options.length; i++) {
       var opt =options[i];
       var el = document.createElement("option");
@@ -37,8 +37,8 @@ d3.json("../samples.json").then(function(data) {
 
 // Initializes the page
 function init() {
-  d3.json("../samples.json").then(function(samplesJson) {
-    var sampleId = samplesJson.names[0];
+  d3.json("../samples.json").then(function(jsonData) {
+    var sampleId = jsonData.names[0];
     // displayMetaData(sampleId);
     buildBarChart(sampleId);
     buildBubbleChart(sampleId);
@@ -56,14 +56,21 @@ function optionChanged(sampleId) {
 
 
 
-function buildBubbleChart() {
+function buildBubbleChart(sampleId) {
   // Read in samples.json
-  d3.json("../samples.json").then(function(samplesJson) {
-    var x_axis = samplesJson["samples"][0]["otu_ids"];
-    var y_axis = samplesJson["samples"][0]["sample_values"];
-    var size = samplesJson["samples"][0]["sample_values"];
-    var color = samplesJson["samples"][0]["otu_ids"];
-    var texts = samplesJson["samples"][0]["otu_labels"];
+  d3.json("../samples.json").then(function(jsonData) {
+
+    var samplesFilter = jsonData["samples"].filter(item => item["id"] == sampleId);
+    // var x_axis = jsonData["samples"][0]["otu_ids"];
+    var x_axis = samplesFilter[0].otu_ids;
+    // var y_axis = jsonData["samples"][0]["sample_values"];
+    var y_axis = samplesFilter[0].sample_values;
+    // var size = jsonData["samples"][0]["sample_values"];
+    var size = samplesFilter[0].sample_values;
+    // var color = jsonData["samples"][0]["otu_ids"];
+    var color = samplesFilter[0].otu_ids;
+    // var texts = jsonData["samples"][0]["otu_labels"];
+    var texts = samplesFilter[0].otu_labels;
 
     // console.log(x_axis);
 
@@ -93,11 +100,17 @@ function buildBubbleChart() {
 
 
 
-function buildBarChart() {
-  d3.json("../samples.json").then(function(samplesJson) {
-    var x_axis = samplesJson["samples"][0]["sample_values"].slice(0,10);
-    var y_axis = samplesJson["samples"][0]["otu_ids"].slice(0,10);
-    var hoverText = samplesJson["samples"][0]["otu_labels"].slice(0,10);
+function buildBarChart(sampleId) {
+  d3.json("../samples.json").then(function(jsonData) {
+
+    var samplesFilter = jsonData["samples"].filter(item => item["id"] == sampleId);
+
+    // var x_axis = jsonData["samples"][0]["sample_values"].slice(0,10);
+    var x_axis = samplesFilter[0].sample_values
+    // var y_axis = jsonData["samples"][0]["otu_ids"].slice(0,10);
+    var y_axis = samplesFilter[0].otu_ids
+    // var hoverText = jsonData["samples"][0]["otu_labels"].slice(0,10);
+    var hoverText = samplesFilter[0].otu_labels
 
 
     var bar = {
