@@ -160,3 +160,10 @@ function displayMetaData(sampleId) {
 init();
 // buildBarChart();
 // buildBubbleChart();
+
+/* To-Do:
+1. Bar Chart Layout
+2. Bar Chart Top10 ***
+3. Bubble Chart color
+4. Combine 3 Charts function
+*/
