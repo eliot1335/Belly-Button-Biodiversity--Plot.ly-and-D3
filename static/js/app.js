@@ -1,19 +1,3 @@
-/* 1. Use the D3 library to read in samples.json.
-   2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in an individual.
-   - Use samples_values as the values for the bar chart.
-   - Use otu_ids as the labels for the bar chart.
-   - Use otu_labels as the hovertext for the chart.
-   3. Create a bubble chart that displays each samlpe.
-   - Use otu_ids for the x values.
-   - Use sample_values for the y values.
-   - Use otu_ids for the marker colors.
-   - Use otu_labels for the text values.
-   4. Display the sample metadat, i.e., an individual's demographic information.
-   5. Display each key-value pair from the metadata JSON object somewhere on the page.
-   6. Update all of the plots any time that a new sample is selected.
-  */
-
-
 // Initializes the page
 function init() {
   d3.json("../samples.json").then(function(jsonData) {
@@ -70,7 +54,7 @@ function buildDisplays(sampleId) {
 
     // var data1 = bubble;
     var layout1 = {
-      title: "Belly Button Bacteria",
+      title: "Belly Button Biodiversity",
       xaxis: {title: "OTU ID"}
     };
 
@@ -112,34 +96,9 @@ function buildDisplays(sampleId) {
     var metadataPanel = d3.select("#sample-metadata");
     metadataPanel.html("");
     Object.entries(mFilter[0]).forEach(([key, value]) => {
-      metadataPanel.append("h6").text(`${key}: ${value}`);
+      metadataPanel.append("p").text(`${key}: ${value}`);
     });
   });
 }
 
 init();
-
-
-
-// dropdown menu create id filter
-  // insert filtered id to grab the info we want
-// metadata populate
-// initialize page
-  // first id
-    //metadata
-    //barchart
-    //bubblechart
-// option change
-  // selected id
-    //metadata
-    //barchart
-    //bubblechart
-
-
-
-/* To-Do:
-1. Bar Chart Layout
-2. Bar Chart Top10 ***
-3. Bubble Chart color
-4. Combine 3 Charts function
-*/
