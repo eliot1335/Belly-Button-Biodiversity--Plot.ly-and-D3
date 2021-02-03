@@ -1,6 +1,6 @@
 // Initializes the page
 function init() {
-  d3.json("../samples.json").then(function(jsonData) {
+  d3.json("./samples.json").then(function(jsonData) {
 
     // Populate dropdown
     var select = document.getElementById("selDataset");
@@ -28,7 +28,7 @@ function optionChanged(sampleId) {
 
 function buildDisplays(sampleId) {
   // Read in json file
-  d3.json("../samples.json").then(function(jsonData) {
+  d3.json("./samples.json").then(function(jsonData) {
     var sFilter = jsonData["samples"].filter(row => row["id"] == sampleId);
     var mFilter = jsonData["metadata"].filter(row => row["id"] == sampleId);
 
