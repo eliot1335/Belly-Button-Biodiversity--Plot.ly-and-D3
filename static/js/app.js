@@ -13,9 +13,7 @@
    6. Update all of the plots any time that a new sample is selected.
   */
 
-d3.json("../samples.json").then(function(jsonData) {
-  console.log(jsonData);
-});
+
 // Initializes the page
 function init() {
   d3.json("../samples.json").then(function(jsonData) {
