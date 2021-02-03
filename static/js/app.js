@@ -13,9 +13,9 @@
    6. Update all of the plots any time that a new sample is selected.
   */
 
-// d3.json("../samples.json").then(function(jsonData) {
-//   console.log(jsonData);
-// });
+d3.json("../samples.json").then(function(jsonData) {
+  console.log(jsonData);
+});
 // Initializes the page
 function init() {
   d3.json("../samples.json").then(function(jsonData) {
@@ -83,21 +83,10 @@ function buildDisplays(sampleId) {
 
     //==========================================
     // Set Variables for Bar Chart
-    
-    // top10Data = samplesFilter[0].sort(compareValues("sample_values", "desc")).slice(0, 10);
-    // console.log(top10Data);
-
-
-
     var xBar = sFilter[0].sample_values.slice(0, 10).reverse();
-    // console.log(xBar);
-    // var xBarTop10 = xBar.sort((firstNum, secondNum) => secondNum - firstNum).slice(0, 10);
-    // console.log(xBar);
-    // console.log(sFilter[0].otu_ids);
-    // Trying to test the correct display of OTU ids
-    var yBar = "OTU"+ `${JSON.stringify(sFilter[0].otu_ids)}`;
-    // console.log(yBar);
-    var textBar = sFilter[0].otu_labels.slice(0, 10);
+    var yBar = sFilter[0].otu_ids.slice(0, 10).reverse().map(id => `OTU ${id}`);
+    var textBar = sFilter[0].otu_labels.slice(0, 10).reverse();
+   
 
     // Set bubble chart parameters
     var bar = {
