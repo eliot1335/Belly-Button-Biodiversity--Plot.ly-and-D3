@@ -1,8 +1,8 @@
-# Plot.ly Homework - Belly Button Biodiversity
+# Belly Button Biodiversity - Plot.ly
 
 In this homework exercise, I will practice building an ineteractive page using javascript and plot.ly.
 
-## Step 1: Plotly
+## Plotly
 1. Use the D3 library to read in samples.json.
 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in an individual.
     - Use samples_values as the values for the bar chart.
