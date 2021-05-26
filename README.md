@@ -1,6 +1,6 @@
 # Belly Button Biodiversity - Plot.ly
 
-In this homework exercise, I will practice building an ineteractive page using javascript and plot.ly.
+In this exercise, I will practice building an ineteractive page using javascript and plot.ly.
 
 ## Plotly
 1. Use the D3 library to read in samples.json.
